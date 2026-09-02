@@ -131,6 +131,89 @@ function ToggleMessage(){
 }
 
 
+// Aufgabe 8: Rendere mehrere Elemente aus einem Array. Thema: Lists & map()
+function TechList(){
+
+  const technologies = [
+    { id: 1, name: "JavaScript" },
+    { id: 2, name: "React"},
+    { id: 3, name: "C#"},
+    {id: 4, name: "HTML"}
+  ]
+
+  return(
+    <div>
+
+      <h2>Technologies</h2>
+
+      <ul>
+        {technologies.map(item => (
+          <li key={item.id}>
+              {item.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+
+function LiveInput(){
+
+  const [name, setName] = useState("");
+
+  function handleChange(event){
+
+    setName(event.target.value);
+
+  }
+
+  return(
+    <div>
+      <input value={name} onChange={handleChange}/>
+      <p>Hello {name}</p>
+    </div>
+  );
+}
+
+
+function NameForm(){
+
+  const [name, setName] = useState("");
+
+  const [submittedName, setSubmittedName] = useState("");
+
+
+  function handleChange(event){
+
+    setName(event.target.value);
+  }
+
+  function handleSubmit(event){
+
+    event.preventDefault();
+
+    setSubmittedName(name);
+  }
+
+  return(
+
+    <>
+      <form onSubmit={handleSubmit}>
+          <input value={name} onChange={handleChange}></input>
+          <button>Submit</button>
+      </form>
+
+      <p>Submitted Name: {submittedName}</p>
+    </>
+
+  )
+}
+
+
+
+
+
 function App() {
   return(
     <div>
@@ -146,6 +229,12 @@ function App() {
       <AdvancedCounter />
 
       <ToggleMessage />
+
+      <TechList />
+
+      <LiveInput />
+
+      <NameForm />
     </div>
   )
 }
