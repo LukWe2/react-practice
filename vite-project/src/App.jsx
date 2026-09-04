@@ -2,11 +2,12 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
+import { useState } from "react";
 
-// Aufgabe 1: Erstelle mehrere einfache React-Komponenten und füge sie in App zusammen. Thema: Components & JSX
-function Greeting(){
-  return <h1>Hello React!</h1>
-}
+import Greeting from "./exercises/13-components-import-export/Greeting";
+import Profile from "./exercises/13-components-import-export/Profile";
+import Counter from "./exercises/13-components-import-export/Counter";
+import Exercise from "./exercises/16-delete-from-array-state/Exercise";
 
 
 function AboutMe(){
@@ -30,19 +31,6 @@ function Profile2(){
   )
 }
 
-// Aufgabe 3 - Props: Übergib Daten von der Parent- (App) an die Child-Komponente (Profile) und verwende sie dort. Thema: Props
-// so sind React Components wiederverwendbar, brauch nicht neue Component für anderes Profil
-function Profile(props){
-  
-  return(
-      <div>
-        <p>{props.name}</p>
-        <p>I study {props.study}.</p>
-        <p>Current year: {props.year}</p>
-        <p>Next year: {props.year + 1}</p>
-      </div>
-  )
-}
 
 
 // Aufgabe 4: Reagiere mit einer Funktion auf einen Button-Klick. Thema: Events & onClick
@@ -55,24 +43,6 @@ function WelcomeButton(){
   return <button onClick={handleClick}>Say hello</button>
 }
 
-
-// Aufgabe 5: Verändere sichtbare Daten nach einem Button-Klick. Thema: State & useState
-import { useState } from "react";
-
-function Counter(){
-  const [count, setCount] = useState(0);
-
-  function handleClick(){
-    setCount(count + 1);
-  }
-
-  return (
-  <div>
-    <p>Clicks: {count}</p>
-    <button onClick={handleClick}>Click me</button>
-  </div>
-  );
-}
 
 // Aufgabe 6: Verändere denselben State mit mehreren Buttons. Thema: useState vertiefen
 function AdvancedCounter(){
@@ -210,6 +180,81 @@ function NameForm(){
   )
 }
 
+// Aufgabe 11: Lass eine Child-Komponente über eine Callback-Prop den State der Parent-Komponente verändern. Thema: Child-to-Parent Communication
+// Parent
+function MessageBox(){
+
+  const [message, setMessage] = useState("Original message");
+
+  function handleChangeMessage(){
+
+    setMessage("Message changed!");
+
+  }
+
+  return(
+    <>
+      <p>{message}</p>
+
+      <ChangeMessageButton onButtonClick={handleChangeMessage} />
+    </>
+  )
+}
+
+
+// Child
+function ChangeMessageButton(props){
+
+  return(
+    <button onClick={props.onButtonClick}>Change message</button>
+  )
+}
+
+
+// Aufgabe 12: Verschiebe gemeinsamen State in den gemeinsamen Parent, damit mehrere Child-Komponenten darauf zugreifen können. Thema: Lifting State Up
+function SharedCounter(){
+
+  const [count, setCount] = useState(0);
+
+  function increaseCount(){
+
+    setCount(count + 1);
+  }
+
+  function decreaseCount(){
+
+    setCount(count - 1);
+  }
+
+  return(
+
+    <div>
+      <CounterDisplay count={count} />
+      <CounterControls onIncreaseButtonClick={increaseCount} onDecreaseButtonClick={decreaseCount}/>
+    </div>
+  )
+}
+
+
+function CounterDisplay(prop){
+
+  return(
+    <p>{prop.count}</p>
+  )
+}
+
+
+function CounterControls(props){
+
+  return(
+
+    <div>
+      <button onClick={props.onIncreaseButtonClick}>Increase</button>
+      <button onClick={props.onDecreaseButtonClick}>Decrease</button>
+    </div>
+  )
+
+}
 
 
 
@@ -217,6 +262,11 @@ function NameForm(){
 function App() {
   return(
     <div>
+
+      <Exercise />
+
+      <SharedCounter />
+
       <Greeting />
       <AboutMe />
       <Profile name="Lukas" study="Human-Computer-Interaction" year={2026}/>
@@ -235,6 +285,9 @@ function App() {
       <LiveInput />
 
       <NameForm />
+
+      <MessageBox />
+
     </div>
   )
 }
