@@ -7,7 +7,7 @@ import { useState } from "react";
 import Greeting from "./exercises/13-components-import-export/Greeting";
 import Profile from "./exercises/13-components-import-export/Profile";
 import Counter from "./exercises/13-components-import-export/Counter";
-import Exercise from "./exercises/18-multiple-controlled-inputs/Exercise";
+import Exercise from "./exercises/21-fetch-api-data/Exercise";
 
 
 function AboutMe(){

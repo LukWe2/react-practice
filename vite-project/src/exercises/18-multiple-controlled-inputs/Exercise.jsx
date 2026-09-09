@@ -60,3 +60,26 @@ function Exercise(){
 
 
 export default Exercise;
+
+// 1. Warum brauchen die drei Inputs jeweils ein unterschiedliches name-Attribut, obwohl alle dieselbe handleChange()-Funktion verwenden?
+// Antwort: Da es drei verschiedene input-Elemente sind und jedes einzelne sein name-Atribut braucht, um unterscheidbar zu sein
+// Antwort: Unterschiedliche name-Attribute: richtig. Dadurch kann dieselbe handleChange()-Funktion erkennen, welches Input-Feld das Event ausgelöst hat: 
+// event.target.name ergibt je nach Input: "name", "email" oder "city"
+
+// 2. Was würde passieren, wenn du beim Update nur schreibst:
+/*
+setFormData({
+    email: event.target.value
+});
+*/
+// anstatt vorher: ...formData zu verwenden?
+// Antwort: Dann würde das originale Array ersetzt werden und nur die email Property besitzen statt wie bisher die drei Properties
+// man kopiert deswegen das Array und erstellt ein neues
+// Antwort: wird nicht nur email verändert, sondern das bisherige Objekt komplett durch ein neues Objekt ersetzt (email wäre einzige Property), name und city wären danach weg.
+
+// Was bedeuten bei: [event.target.name]: event.target.value die linke und die rechte Seite jeweils genau?
+// Antwort: Das linke ist ein dynamischer Property Name und wird nachdem mit onChange die handleChange Methode in der Komponente aufgerufen wurde
+// mit dem jeweiligen name-Attribut gefüllt, die rechte Seite ist das, was im Input eingegeben wird und ist im HTML input-Element wegen des value
+// Attributs mit der Komponente verbunden, wird dann mit setFormData(...) gesetzt und entspricht dann immer dem State (z.B. formData.city)
+// Antwort: Eine kleine Korrektur zu deiner Formulierung: event.target.value ist nicht direkt der State. Es ist zunächst der aktuelle Wert aus dem Input-Element
+// Mit setFormData(...) speicherst du diesen Wert anschließend im State
