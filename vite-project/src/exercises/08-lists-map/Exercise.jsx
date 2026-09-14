@@ -18,6 +18,13 @@ function TechList(){
                         {item.name}
                     </li>
                 ))}
+
+                {/*{technologies.map(function(item){
+                    <li key={item.id}>
+                        {item.name}
+                    </li>
+                })}
+                */}
             </ul>
         </div>
     )
