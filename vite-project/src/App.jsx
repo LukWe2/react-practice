@@ -7,7 +7,7 @@ import { useState } from "react";
 import Greeting from "./exercises/13-components-import-export/Greeting";
 import Profile from "./exercises/13-components-import-export/Profile";
 import Counter from "./exercises/13-components-import-export/Counter";
-import Exercise from "./exercises/26-context-basics/Exercise";
+import Exercise from "./exercises/28-usereducer/Exercise";
 
 
 function App() {

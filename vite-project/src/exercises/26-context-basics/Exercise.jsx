@@ -1,3 +1,9 @@
+// 1. In Komponente die Daten beinhaltet die weitergegeben werden soll (hier: UserDashboard) einen Context mit createContext erstellen und in Variable speichern (hier: UserContext)
+// 2. Im JSX dieser Komponente ein Element <UserContext.Provider (vorher erstellte Variable mit Kontext)> erstellen, darin noch was man mitgeben will, als einfacher Wert oder Objekt mit value={Inhalt} definieren
+// 3. Tag wieder schließen mit </UserContext.Provider>
+// 4. In Komponente die Daten empfangen soll useContext(UserContext) benutzen und in Variablen speichern, ggf. Destructen
+// 5. Daten aus Kontext benutzen, wie hier der name State und die handleChangeName Methode aus der UserDashboard Component, kann jetzt in anderer Childcomponent UserPanel benutzt werden!
+
 import { useState, createContext, useContext } from "react";
 
 const UserContext = createContext(null);
