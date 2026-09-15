@@ -1,5 +1,27 @@
 // Aufgabe 28: Verwalte komplexere State-Änderungen zentral über Actions. Thema: useReducer
 
+// Also useReducer ist eine von React vorimplementierte Hook und kann useState ersetzen zur Übersichtlichkeit, weil wenn viele Aktionen bestehen den State zu verändern wie hochzählen, runterzählen, zurücksetzen, übergeben etc. 
+// existieren und somit auch viele Handler-Funktionen, kann es schnell unübersichtlich werden.
+// Verbesserung: Richtig. Präziser: useReducer kann useState besonders bei komplexerer oder umfangreicher State-Update-Logik ersetzen. Es ist aber nicht grundsätzlich "besser" als useState.
+
+// Deswegen kann man mit useReducer Aktionen als Strings definieren, die dann auf z.B. buttons liegen also im HTML Element was übersichtlicher ist.
+// Verbesserung: Die Actions sind nicht direkt Strings, sondern normalerweise Objekte wie { type: "INCREASE" }. Der String "INCREASE" ist der Wert der type-Property. Beim Button wird dann z.B. dispatch({ type: "INCREASE" }) ausgelöst.
+
+// Jetzt funktioniert es so: man legt in der Component einen initialState als Objekt an, der den State als Property besitzt wie const initialState = { count: 0 }, was wie useState(0) ist.
+// Verbesserung: Der initialState muss nicht innerhalb der Component liegen und wird häufig sogar außerhalb definiert. { count: 0 } entspricht vom Prinzip dem Startwert von useState, nur ist der State hier ein Objekt. 
+// useState(0) hätte dagegen direkt eine Number als State.
+
+// Dann ruft man useReducer auf, welches zwei Argumente erwartet, nämlich als erstes die reducer-Funktion die außerhalb der Component definiert wird und als zweites den initialState.
+// Verbesserung: Richtig. Die reducer-Funktion muss nicht zwingend außerhalb der Component definiert werden, wird aber üblicherweise dort definiert, weil sie unabhängig vom Rendern der Component ist.
+
+// useReducer gibt ein Array zurück mit dem aktuellen State und der dispatch-Function als zweites Element, deswegen ist die Reihenfolge im folgenden Destructing auch so.
+// Verbesserung: dispatch ist kein "zweites Argument", sondern das zweite Element des zurückgegebenen Arrays: [currentState, dispatchFunction].
+
+// Dann destructet man mit const [state, dispatch] einmal eine Variable für den aktuellen State und einmal eine dispatch-Funktion die von React vorimplementiert ist.
+// Verbesserung: Richtig. Die Position ist wichtig: erstes Array-Element = aktueller State, zweites Array-Element = dispatch-Funktion.
+
+// (Alles weitere in VSC):
+
 // useReducer ist von React vorprogrammiert und erwartet zwei Dinge als Argument: 
 // 1. als erstes Argument eine reducer function, in der festgelegt wird, was bei welchen action types passiert
 // 2. den ursprünglichen State also initialState
